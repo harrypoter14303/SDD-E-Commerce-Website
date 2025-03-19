@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org"
+	th:replace="~{header::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section>
+		<div class="container-fluid mt-5 ">
+			<div class="row">
+				<div class="col-md-10 offset-md-1"> <!-- this line must be Present in the code to look like the table be in the middle and it should look nice-->
+					<div class="card">
+						<div class="card-header text-center">
+							<p class="fs-3 mt-3"
+								style="box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3)">View
+								Product</p>
+								<th:block th:if="${session.succMsg}">
+								<p class="text-success fw-bold">[[${session.succMsg}]]</p>
+								<th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+							</th:block>
+
+							<th:block th:if="${session.errorMsg}">
+								<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+								<th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+							</th:block>
+						</div>
+						<div class="card-body "
+							style="box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3)">
+							<table class="table px-2">
+								<thead class="text-center ">
+									<tr>
+										<th scope="col">Sl No</th>
+										<th scope="col">Image</th>
+										<th scope="col">Title</th>
+										<th scope="col">Category</th>
+										<th scope="col">Price</th>
+										<th scope="col">Discount</th>
+										<th scope="col">Discount Price</th>
+										<th scope="col">Status</th>
+										<th scope="col">Stock</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody class="text-center">
+									<tr th:each="p,c:${products}">
+										<th scope="row">[[${c.count}]]</th>
+										<td><img th:src="@{'/img/product/'+${p.image}}"
+										height="75px" width="75px"></td>
+										<td>[[${p.title}]]</td>
+										<td>[[${p.category}]]</td>
+										<td>[[${p.price}]]</td>
+										<td>[[${p.discount}]]</td>
+										<td>[[${p.discountPrice}]]</td>
+										<td>[[${p.isActive}]]</td>
+										<td>[[${p.stock}]]</td>
+										<td><a th:href="@{'/admin/editProduct/'+${p.id}}" class="btn btn-dark">Edit</a>  
+										
+										<a th:href="@{'/admin/deleteProduct/'+${p.id}}" class="btn btn-danger">Delete</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

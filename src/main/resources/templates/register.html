@@ -1,0 +1,119 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeLeaf.org"
+	th:replace="~{header::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container mt-5 p-5">
+			<div class="row">
+				<div class="col-md-5 p-5">
+					<img alt="" src="img/back2.jpg" width="100%" height="450px">
+				</div>
+				<div class="col-md-7 p-1">
+					<div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+						<div class="card-header text-center"> 
+						
+							<p class="fs-4 text-center">Register</p> 
+							
+							<th:block th:if="${session.succMsg}">
+								<p class="text-success fw-bold">[[${session.succMsg}]]</p>
+								<th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+							</th:block>
+
+							<th:block th:if="${session.errorMsg}">
+								<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+								<th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+							</th:block>
+							
+						</div>
+						<div class="card-body">
+							<form action="/saveUser" method="post"
+								enctype="multipart/form-data">
+								<div class="row">
+									<div class="col">
+										<label class="form-lable">First Name <i
+											class="fa-solid fa-user"></i></label> <input required class="form-control"
+											name="name" type="text">
+									</div>
+
+									<div class="col">
+										<label class="form-lable">Mobile Number <i
+											class="fa-solid fa-phone"></i></label> <input required class="form-control"
+											name="mobileNumber" type="number">
+									</div>
+								</div>
+
+								<div class="col">
+									<label class="form-lable">Email <i
+										class="fa-solid fa-envelope"></i></label> <input required class="form-control"
+										name="email" type="email">
+								</div>
+
+								<div class="row">
+									<div class="col">
+										<label class="form-lable">Address <i
+											class="fa-solid fa-location-dot"></i></label> <input required
+											class="form-control" name="address" type="text">
+									</div>
+
+									<div class="col">
+										<label class="form-lable">City <i
+											class="fa-solid fa-city"></i></label> <input required class="form-control"
+											name="city" type="text">
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col">
+										<label class="form-lable">State <i
+											class="fa-solid fa-building-flag"></i></label> <input required
+											class="form-control" name="state" type="text">
+									</div>
+
+									<div class="col">
+										<label class="form-lable">Pincode <i
+											class="fa-solid fa-map-pin"></i></label> <input required class="form-control"
+											name="pincode" type="number">
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col">
+										<label class="form-lable">Password <i
+											class="fa-solid fa-key"></i></label> <input required class="form-control"
+											name="password" type="password">
+									</div>
+
+									<div class="col">
+										<label class="form-lable">Confirm Password <i
+											class="fa-solid fa-lock"></i></label> <input required class="form-control"
+											name="cpassword" type="password">
+									</div>
+								</div>
+
+								<div class="mb-3">
+									<label class="form-lable">Profile Image <i
+										class="fa-regular fa-user"></i></label> <input required class="form-control"
+										name="img" type="file">
+								</div>
+
+								<button type="submit"
+									class="btn bg-primary text-white col-md-12">Register</button>
+							</form>
+						</div>
+
+						<div class="card-footer text-center">
+
+							have an Account ?<a href="/signin" class="text-decoration-none">Login</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

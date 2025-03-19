@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org"
+	th:replace="~{header::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section>
+		<div class="container-fluid mt-5 ">
+			<div class="row">
+				<div class="col-md-10 offset-md-1"> <!-- this line must be Present in the code to look like the table be in the middle and it should look nice-->
+					<div class="card">
+						<div class="card-header text-center">
+							<p class="fs-3 mt-3"
+								style="box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3)">Users</p>
+								<th:block th:if="${session.succMsg}">
+								<p class="text-success fw-bold">[[${session.succMsg}]]</p>
+								<th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+							</th:block>
+
+							<th:block th:if="${session.errorMsg}">
+								<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+								<th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+							</th:block>
+						</div>
+						<div class="card-body "
+							style="box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3)">
+							<table class="table px-2">
+								<thead class="text-center ">
+									<tr>
+										<th scope="col">Sl No</th>
+										<th scope="col">Profile</th>
+										<th scope="col">Name</th>
+										<th scope="col">Email</th>
+										<th scope="col">Mobile No</th>
+										<th scope="col">Address</th>
+										<th scope="col">Status</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody class="text-center">
+									<tr th:each="u,c:${users}">
+										<th scope="row">[[${c.count}]]</th>
+										<td><img th:src="@{'/img/profile/'+${u.profileImage}}"
+										height="75px" width="75px"></td>
+										<td>[[${u.name}]]</td>
+										<td>[[${u.email}]]</td>
+										<td>[[${u.mobileNumber}]]</td>
+										<td>[[${u.address+','+u.city+','+u.state+','+u.pincode}]]</td>
+										<td>[[${u.isEnable}]]</td>
+										
+										<td><a th:href="@{'/admin/updateStatus?status=true&id='+${u.id}}" class="btn btn-dark">Active</a>  <br>
+										
+										<a th:href="@{'/admin/updateStatus?status=false&id='+${u.id}}" class="btn btn-danger">InActive</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
